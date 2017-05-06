@@ -200,9 +200,14 @@ const getTzForCity = (city) => tzMaps
     .filter(tzMap => tzMap['city'] === city)
     .reduce(tzMap => tzMap);
 
-const getTzForName = (name) => tzMaps
-    .filter(tzMap => tzMap['zoneName'] === name)
-    .reduce(tzMap => tzMap);
+const getTzForName = (name) => {
+  const filterResults = tzMaps.filter(tzMap => tzMap['zoneName'] === name);
+  console.log(`filterResults.length: ${filterResults.length}`);
+  return filterResults.reduce(tzMap => tzMap);
+};
+// const getTzForName = (name) => tzMaps
+//     .filter(tzMap => tzMap['zoneName'] === name)
+//     .reduce(tzMap => tzMap);
 
 const guessUserTz = () => {
   // User-Agent sniffing is not always reliable, but is the recommended technique
@@ -228,7 +233,7 @@ const guessUserTz = () => {
   } else {
     userTz = moment.tz.guess();
   }
-
+  console.log(`userTz: ${userTz}`);
   return getTzForName(userTz);
 };
 
