@@ -168,7 +168,7 @@ const tzNames = (() => {
       .filter(name => name.indexOf('/') >= 0)
       .filter(name => !scrubbedPrefixes.indexOf(name.split('/')[0]) >= 0)
       .filter(name => !scrubbedSuffixes.indexOf(name.split('/').slice(-1)[0]) >= 0);
-
+  console.log(`tzNames.length: ${tzNames.length}`);
   return tzNames;
 })();
 
@@ -179,7 +179,7 @@ const tzCities = tzNames
     .map(name => (['Canada', 'Mexico', 'US'].indexOf(name.split('/')[0]) >= 0)
       ? name : name.split('/').slice(-1)[0])
     .map(name => name.replace(/_/g, ' '));
-
+console.log(`tzCities.length: ${tzCities.length}`);
 // Provide a mapping between a human-friendly city name and its corresponding
 // timezone identifier and timezone abbreviation as a named export.
 // We can fuzzy match on any of these.
@@ -193,6 +193,8 @@ const tzMaps = tzCities.map(city => {
 
   return tzMap;
 });
+
+console.log(`tzMap.length: ${tzMaps.length}`);
 
 const getTzForCity = (city) => tzMaps
     .filter(tzMap => tzMap['city'] === city)
