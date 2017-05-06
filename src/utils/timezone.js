@@ -201,7 +201,7 @@ const getTzForX = (array, key, target) => {
       .filter(array => array[key] === target);
 
   return filterResults.length
-      ? filterResults.reduce(item => item);
+      ? filterResults.reduce(item => item)
       : {};
 };
 
