@@ -196,15 +196,19 @@ const tzMaps = tzCities.map(city => {
 
 console.log(`tzMap.length: ${tzMaps.length}`);
 
-const getTzForCity = (city) => tzMaps
-    .filter(tzMap => tzMap['city'] === city)
-    .reduce(tzMap => tzMap);
+const getTzForX = (array, key, target) => {
+  const filterResults = array
+      .filter(array => array[key] === target);
 
-const getTzForName = (name) => {
-  const filterResults = tzMaps.filter(tzMap => tzMap['zoneName'] === name);
-  console.log(`filterResults.length: ${filterResults.length}`);
-  return filterResults.reduce(tzMap => tzMap);
+  return filterResults.length
+      ? filterResults.reduce(item => item);
+      : {};
 };
+
+const getTzForCity = (city) => getTzForX(tzMaps, 'city', city);
+
+const getTzForName = (name) => getTzForX(tzMaps, 'zoneName', name);
+
 // const getTzForName = (name) => tzMaps
 //     .filter(tzMap => tzMap['zoneName'] === name)
 //     .reduce(tzMap => tzMap);
